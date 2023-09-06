@@ -1,4 +1,5 @@
 ## Motivation
+**Package is not developed yet.**
 
 Sometimes when a new programmer appears in team, he confuses when reading Cubits, Controllers and etc(except BLoC). <br>
 Or it's really hard to search a big function in big controller.
@@ -6,8 +7,7 @@ Or it's really hard to search a big function in big controller.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+
 
 ## Usage
 
