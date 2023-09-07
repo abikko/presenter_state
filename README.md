@@ -2,7 +2,7 @@
 **Package is not developed yet.**
 
 Sometimes when a new programmer appears in team, he confuses when reading Cubits, Controllers and etc(except BLoC). <br>
-Or it's really hard to search a big function in big controller.
+It's really hard to understand what current Controller do.
 **Contract** shows all methods, and View exactly don't know about Presenter.
 
 ## Getting started

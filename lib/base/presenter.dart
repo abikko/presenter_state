@@ -1,15 +1,14 @@
 import 'dart:async';
 
-import 'package:presenter_state/base/base_contract.dart';
+import 'package:presenter_state/base/contract.dart';
 
 abstract base class Presenter<IContract extends Contract, State> {
-  Presenter(this._contract);
+  Presenter(State initialState) {
+    _state = initialState;
+  }
 
-  final IContract _contract;
   late State _state;
   final StreamController<State> _stateController = StreamController.broadcast();
-
-  IContract get contract => _contract;
 
   State get state => _state;
 
