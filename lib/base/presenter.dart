@@ -5,12 +5,22 @@ import 'package:presenter_state/base/contract.dart';
 abstract base class Presenter<IContract extends Contract, State> {
   Presenter(State initialState) {
     _state = initialState;
+    mounted = true;
   }
 
-  late State _state;
+  State? _state;
+  bool mounted = false;
+
   final StreamController<State> _stateController = StreamController.broadcast();
 
-  State get state => _state;
+  State get state {
+    assert(
+      _state == null && !mounted,
+      'Trying getting state when state null or during markNeedsBuild',
+    );
+
+    return _state!;
+  }
 
   Stream<State> get stream => _stateController.stream;
 
@@ -25,6 +35,7 @@ abstract base class Presenter<IContract extends Contract, State> {
   }
 
   void dispose() {
+    mounted = false;
     _stateController.close();
   }
 }
