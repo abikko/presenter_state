@@ -3,5 +3,9 @@ abstract interface class Contract<State> {
 
   void dispose();
 
-  Stream<State> currentState();
+  Stream<State> watchState();
+
+  State? currentState();
+
+  State? initialState();
 }

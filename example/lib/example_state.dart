@@ -1,5 +1,13 @@
-sealed class ExampleState {}
+sealed class ExampleState {
+  final int count;
 
-class ExampleInitialState extends ExampleState {}
+  ExampleState({required this.count});
+}
 
-class ExampleLoadingState extends ExampleState {}
+class ExampleInitialState extends ExampleState {
+  ExampleInitialState({required super.count});
+}
+
+class ExampleLoadingState extends ExampleState {
+  ExampleLoadingState({required super.count});
+}

@@ -3,15 +3,18 @@ import 'dart:async';
 import 'package:presenter_state/base/contract.dart';
 
 abstract base class Presenter<IContract extends Contract, State> {
-  Presenter(State initialState) {
-    _state = initialState;
+  Presenter(this._initialState) {
+    _state = _initialState;
     mounted = true;
   }
 
-  State? _state;
-  bool mounted = false;
-
+  Stream<State> get stream => _stateController.stream;
   final StreamController<State> _stateController = StreamController.broadcast();
+
+  State? _state;
+  final State? _initialState;
+  bool mounted = false;
+  bool shouldNotify = false;
 
   State get state {
     assert(
@@ -22,10 +25,6 @@ abstract base class Presenter<IContract extends Contract, State> {
     return _state!;
   }
 
-  Stream<State> get stream => _stateController.stream;
-
-  bool shouldNotify = false;
-
   set state(State updatedState) {
     if (!_stateController.isClosed) return;
 
@@ -33,6 +32,15 @@ abstract base class Presenter<IContract extends Contract, State> {
 
     if (shouldNotify) _stateController.add(updatedState);
   }
+
+  void notifyListeners() {
+    bool tempVariable = shouldNotify;
+    shouldNotify = true;
+    state = state;
+    shouldNotify = tempVariable;
+  }
+
+  State? initialState() => _initialState;
 
   void dispose() {
     mounted = false;
