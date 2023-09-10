@@ -38,7 +38,7 @@ class _ReferActionState<IContract extends Contract, S> extends State<ReferAction
   Widget build(BuildContext context) {
     return StreamBuilder<S>(
       initialData: contract.initialState(),
-      stream: contract.watchState().map((event) => event as S),
+      stream: contract.watchState() as Stream<S>,
       builder: widget.builder,
     );
   }
