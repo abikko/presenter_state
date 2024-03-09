@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:presenter_state/base/contract.dart';
 
-/// Adds possibility to read [IContract] nearest in the widget tree
+/// Adds possibility to read [IContract]type nearest in the widget tree
 ///
 /// To get more information read [https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html]
 class ReferListener<IContract extends Contract> extends StatefulWidget {

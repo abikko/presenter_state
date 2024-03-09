@@ -3,6 +3,7 @@ import 'package:presenter_state/base/contract.dart';
 
 class ContractScoper<IContract extends Contract> extends InheritedWidget {
   final IContract contract;
+
   const ContractScoper({
     required Widget child,
     required this.contract,
@@ -10,7 +11,8 @@ class ContractScoper<IContract extends Contract> extends InheritedWidget {
   }) : super(child: child);
 
   static ContractScoper of(BuildContext context) {
-    final ContractScoper? result = context.dependOnInheritedWidgetOfExactType<ContractScoper>();
+    final ContractScoper? result =
+        context.dependOnInheritedWidgetOfExactType<ContractScoper>();
     assert(result != null, 'No ContractScope found in context');
     return result!;
   }

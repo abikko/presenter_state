@@ -1,20 +1,17 @@
 import 'dart:async';
 
-import 'package:presenter_state/base/contract.dart';
-
-abstract base class Presenter<IContract extends Contract, State> {
+abstract base class Presenter<State> {
   Presenter(this._initialState) {
     _state = _initialState;
     mounted = true;
   }
 
-  Stream<State> get stream => _stateController.stream;
   final StreamController<State> _stateController = StreamController.broadcast();
 
   State? _state;
   final State? _initialState;
   bool mounted = false;
-  bool shouldNotify = false;
+  List<StreamSubscription> subscriptions = [];
 
   State get state {
     assert(
@@ -25,25 +22,24 @@ abstract base class Presenter<IContract extends Contract, State> {
     return _state!;
   }
 
+  Stream<State> watchState() {
+    return _stateController.stream;
+  }
+
   set state(State updatedState) {
     if (!_stateController.isClosed) return;
 
     _state = updatedState;
-
-    if (shouldNotify) _stateController.add(updatedState);
-  }
-
-  void notifyListeners() {
-    bool tempVariable = shouldNotify;
-    shouldNotify = true;
-    state = state;
-    shouldNotify = tempVariable;
+    _stateController.add(updatedState);
   }
 
   State? initialState() => _initialState;
 
   void dispose() {
     mounted = false;
+    for (var subscription in subscriptions) {
+      subscription.cancel();
+    }
     _stateController.close();
   }
 }

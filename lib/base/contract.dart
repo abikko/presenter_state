@@ -5,7 +5,5 @@ abstract interface class Contract<State> {
 
   Stream<State> watchState();
 
-  State? currentState();
-
   State? initialState();
 }

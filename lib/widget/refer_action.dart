@@ -4,16 +4,16 @@ import 'package:presenter_state/base/contract.dart';
 typedef ReferActionWidgetBuilder<T> = Widget Function(BuildContext context, AsyncSnapshot<T> state);
 
 class ReferAction<IContract extends Contract, S> extends StatefulWidget {
-  final IContract contract;
-  final S? initialState;
-  final ReferActionWidgetBuilder<S> builder;
-
   const ReferAction({
     required this.contract,
     required this.builder,
     this.initialState,
     super.key,
   });
+
+  final IContract contract;
+  final S? initialState;
+  final ReferActionWidgetBuilder<S> builder;
 
   @override
   State<ReferAction<IContract, S>> createState() => _ReferActionState<IContract, S>();
