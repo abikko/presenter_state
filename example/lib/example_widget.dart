@@ -20,7 +20,11 @@ class ExampleWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(""),
+                  Text(
+                    switch (state) {
+                      ExampleInitialState() => state.count.toString(),
+                    },
+                  ),
                   Row(
                     children: [
                       ElevatedButton(

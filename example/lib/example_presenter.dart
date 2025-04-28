@@ -18,5 +18,5 @@ final class ExamplePresenter extends Presenter<ExampleState> implements ExampleC
   }
 
   @override
-  ExampleState get initialState => throw UnimplementedError();
+  ExampleState get initialState => ExampleInitialState(count: 0);
 }

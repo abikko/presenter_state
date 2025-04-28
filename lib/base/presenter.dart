@@ -1,17 +1,17 @@
 import 'dart:async';
 
 abstract class PresenterStream<State> {
-  PresenterStream({required this.stateBroadcastController});
   Stream<State> get stream;
 
   //TODO: Think about using StreamController.broadcast - I think it is working a little bit strange...
-  final StreamController<State> stateBroadcastController;
+  late final StreamController<State> stateBroadcastController;
 }
 
 abstract base class Presenter<State> extends PresenterStream<State> {
-  Presenter(this._initialState) : super(stateBroadcastController: StreamController.broadcast()) {
+  Presenter(this._initialState) {
     _state = _initialState;
     mounted = true;
+    stateBroadcastController = StreamController<State>.broadcast();
   }
 
   State? _state;
