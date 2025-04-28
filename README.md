@@ -1,4 +1,4 @@
-**Package is not developed. Dart not giving feature to extend abstract interface.**
+**Package is currently in development phase.**
 
 ## Motivation
 
