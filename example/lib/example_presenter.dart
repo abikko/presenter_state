@@ -6,9 +6,6 @@ final class ExamplePresenter extends Presenter<ExampleState> implements ExampleC
   ExamplePresenter() : super(ExampleInitialState(count: 0));
 
   @override
-  void init() {}
-
-  @override
   void add() {
     state = ExampleInitialState(count: state.count + 1);
   }

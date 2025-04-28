@@ -5,10 +5,10 @@ class ContractScope<IContract extends Contract> extends InheritedWidget {
   final IContract contract;
 
   const ContractScope({
-    required Widget child,
+    required super.child,
     required this.contract,
     super.key,
-  }) : super(child: child);
+  });
 
   static ContractScope of(BuildContext context) {
     final ContractScope? result = context.dependOnInheritedWidgetOfExactType<ContractScope>();

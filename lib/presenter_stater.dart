@@ -1,4 +1,4 @@
-library presenter_state;
+library;
 
 export 'base/contract.dart' show Contract;
 export 'base/presenter.dart' show Presenter;

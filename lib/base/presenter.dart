@@ -23,7 +23,7 @@ abstract base class Presenter<State> extends PresenterStream<State> {
 
   State get state {
     assert(
-      _state == null && !mounted,
+      _state != null && mounted,
       'Trying getting state when state null or during markNeedsBuild',
     );
 
@@ -35,7 +35,7 @@ abstract base class Presenter<State> extends PresenterStream<State> {
   }
 
   set state(State updatedState) {
-    if (!stateBroadcastController.isClosed) return;
+    if (stateBroadcastController.isClosed) return;
 
     _state = updatedState;
     stateBroadcastController.add(updatedState);
