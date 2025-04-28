@@ -2,8 +2,7 @@ import 'package:example/example_contract.dart';
 import 'package:example/example_state.dart';
 import 'package:presenter_state/base/presenter.dart';
 
-final class ExamplePresenter extends Presenter<ExampleState>
-    implements ExampleContract {
+final class ExamplePresenter extends Presenter<ExampleState> implements ExampleContract {
   ExamplePresenter() : super(ExampleInitialState(count: 0));
 
   @override
@@ -20,4 +19,7 @@ final class ExamplePresenter extends Presenter<ExampleState>
 
     state = ExampleInitialState(count: state.count - 1);
   }
+
+  @override
+  ExampleState get initialState => throw UnimplementedError();
 }

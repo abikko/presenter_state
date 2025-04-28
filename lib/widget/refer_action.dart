@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:presenter_state/base/contract.dart';
 
-typedef ReferActionWidgetBuilder<T> = Widget Function(BuildContext context, AsyncSnapshot<T> state);
+typedef ReferActionWidgetBuilder<T> = Widget Function(BuildContext context, T state);
 
 class ReferAction<IContract extends Contract, S> extends StatefulWidget {
   const ReferAction({
@@ -25,21 +25,28 @@ class _ReferActionState<IContract extends Contract, S> extends State<ReferAction
 
   @override
   void initState() {
+    super.initState();
     contract = widget.contract;
     initialState = widget.initialState;
     assert(
       widget.contract.watchState() is Stream<S>,
       "Provided an error [IContract] object",
     );
-    super.initState();
+  }
+
+  Widget map(BuildContext context, AsyncSnapshot<S> snapshot) {
+    if (snapshot.hasError) {
+      throw snapshot.error ?? Exception();
+    }
+    return widget.builder(context, snapshot.data as S);
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<S>(
-      initialData: contract.initialState(),
+      initialData: contract.initialState,
       stream: contract.watchState() as Stream<S>,
-      builder: widget.builder,
+      builder: map,
     );
   }
 

@@ -13,30 +13,31 @@ class ExampleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ReferAction<ExampleContract, ExampleState>(
       contract: contract,
-      builder: (_, AsyncSnapshot<ExampleState> state) => switch (state.data) {
-        ExampleInitialState() => Scaffold(
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(""),
-                Row(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => contract.add(),
-                      child: const Text("+"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => contract.decrease(),
-                      child: const Text("-"),
-                    ),
-                  ],
-                ),
-              ],
+      builder: (_, ExampleState state) {
+        return switch (state) {
+          ExampleInitialState() => Scaffold(
+              body: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(""),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => contract.add(),
+                        child: const Text("+"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => contract.decrease(),
+                        child: const Text("-"),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ExampleLoadingState() => const CircularProgressIndicator(),
-        null => const Text(""),
+          ExampleLoadingState() => const CircularProgressIndicator(),
+        };
       },
     );
   }

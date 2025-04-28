@@ -1,17 +1,25 @@
 import 'dart:async';
 
-abstract base class Presenter<State> {
-  Presenter(this._initialState) {
+abstract class PresenterStream<State> {
+  PresenterStream({required this.stateBroadcastController});
+  Stream<State> get stream;
+
+  //TODO: Think about using StreamController.broadcast - I think it is working a little bit strange...
+  final StreamController<State> stateBroadcastController;
+}
+
+abstract base class Presenter<State> extends PresenterStream<State> {
+  Presenter(this._initialState) : super(stateBroadcastController: StreamController.broadcast()) {
     _state = _initialState;
     mounted = true;
   }
 
-  final StreamController<State> _stateController = StreamController.broadcast();
-
   State? _state;
   final State? _initialState;
   bool mounted = false;
-  List<StreamSubscription> subscriptions = [];
+
+  @override
+  Stream<State> get stream => stateBroadcastController.stream;
 
   State get state {
     assert(
@@ -23,23 +31,18 @@ abstract base class Presenter<State> {
   }
 
   Stream<State> watchState() {
-    return _stateController.stream;
+    return stateBroadcastController.stream;
   }
 
   set state(State updatedState) {
-    if (!_stateController.isClosed) return;
+    if (!stateBroadcastController.isClosed) return;
 
     _state = updatedState;
-    _stateController.add(updatedState);
+    stateBroadcastController.add(updatedState);
   }
-
-  State? initialState() => _initialState;
 
   void dispose() {
     mounted = false;
-    for (var subscription in subscriptions) {
-      subscription.cancel();
-    }
-    _stateController.close();
+    stateBroadcastController.close();
   }
 }
