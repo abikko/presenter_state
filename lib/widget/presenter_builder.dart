@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:presenter_state/base/contract.dart';
 
-typedef ReferActionWidgetBuilder<T> = Widget Function(BuildContext context, T state);
+typedef PresenterWidgetBuilder<T> = Widget Function(BuildContext context, T state);
 
-class ReferAction<IContract extends Contract, S> extends StatefulWidget {
-  const ReferAction({
+class PresenterBuilder<IContract extends Contract, S> extends StatefulWidget {
+  const PresenterBuilder({
     required this.contract,
     required this.builder,
     this.initialState,
@@ -13,13 +13,13 @@ class ReferAction<IContract extends Contract, S> extends StatefulWidget {
 
   final IContract contract;
   final S? initialState;
-  final ReferActionWidgetBuilder<S> builder;
+  final PresenterWidgetBuilder<S> builder;
 
   @override
-  State<ReferAction<IContract, S>> createState() => _ReferActionState<IContract, S>();
+  State<PresenterBuilder<IContract, S>> createState() => _PresenterBuilderState<IContract, S>();
 }
 
-class _ReferActionState<IContract extends Contract, S> extends State<ReferAction<IContract, S>> {
+class _PresenterBuilderState<IContract extends Contract, S> extends State<PresenterBuilder<IContract, S>> {
   late final IContract contract;
   late final S? initialState;
 

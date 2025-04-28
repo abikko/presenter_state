@@ -1,5 +1,5 @@
 import 'package:example/example_state.dart';
-import 'package:presenter_state/presenter_stater.dart';
+import 'package:presenter_state/presenter_state.dart';
 
 /// Currently, we have to use keyword "implements" instead of "extends"
 ///

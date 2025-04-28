@@ -2,7 +2,7 @@ import 'package:example/example_contract.dart';
 import 'package:example/example_presenter.dart';
 import 'package:example/example_state.dart';
 import 'package:flutter/material.dart';
-import 'package:presenter_state/presenter_stater.dart';
+import 'package:presenter_state/presenter_state.dart';
 
 class ExampleWidget extends StatelessWidget {
   ExampleWidget({super.key});
@@ -11,7 +11,7 @@ class ExampleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ReferAction<ExampleContract, ExampleState>(
+    return PresenterBuilder<ExampleContract, ExampleState>(
       contract: contract,
       builder: (_, ExampleState state) {
         return switch (state) {

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:presenter_state/presenter_stater.dart';
+import 'package:presenter_state/presenter_state.dart';
 
 final class MockState extends Mock {
   MockState({required this.value});
