@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  Setup flutter:
+  setup-flutter:
     runs-on: macos-13
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -15,7 +15,7 @@ jobs:
         run: curl -fsSL https://fvm.app/install.sh | bash
       - name: Setup fvm version
         run: fvm install 3.29.2 && fvm use 3.29.2
-  Run tests:
+  run-tests:
     runs-on: macos-13
     steps:
       - name: Check out repository code
