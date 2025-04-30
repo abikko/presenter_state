@@ -1,6 +1,8 @@
 name: Build and Setup 🏗
-run-name: ${{ github.actor }} pushed and opened a Pull Request 💻
-on: [push]
+run-name: ${{ github.actor }} pushed and opened a Pull Request 💻d
+on:
+  pull_request:
+    types: [review_requested, opened, reopened, synchronize]
 jobs:
   setup-flutter:
     runs-on: macos-13
