@@ -15,7 +15,8 @@ jobs:
       - run: |
           fvm install 3.29.2 && fvm use 3.29.2
       - name: Run tests
-      - run: fvm flutter test
+      - run: |
+          fvm flutter test
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
