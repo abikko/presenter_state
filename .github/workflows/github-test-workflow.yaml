@@ -3,7 +3,8 @@ run-name: Testing ${{ github.actor }} code 🚀
 on:
   workflow_run:
     workflows: [" Build and Setup 🏗"]
-run-tests:
+jobs:
+  run-tests:
     needs: setup-flutter
     workflow-run: 
     runs-on: macos-13
