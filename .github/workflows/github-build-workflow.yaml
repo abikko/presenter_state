@@ -1,5 +1,5 @@
 name: Build and Setup 🏗
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} pushed and opened a Pull Request 💻
 on: [push]
 jobs:
   setup-flutter:
