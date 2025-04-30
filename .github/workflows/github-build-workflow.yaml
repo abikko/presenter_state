@@ -13,6 +13,6 @@ jobs:
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - name: Setup fvm 🚀
         run: curl -fsSL https://fvm.app/install.sh | bash
-      - name: Setup fvm version
+      - name: Setup fvm version 📌
         run: fvm install 3.29.2 && fvm use 3.29.2
       - run: echo "🍏 This job's status is ${{ job.status }}."
