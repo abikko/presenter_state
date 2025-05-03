@@ -36,7 +36,7 @@ abstract base class Presenter<State> extends PresenterStream<State> {
 
   set state(State updatedState) {
     assert(
-      stateBroadcastController.isClosed && mounted,
+      !stateBroadcastController.isClosed && mounted,
       'Trying to update state when Stream is closed and when presenter is mounted',
     );
 
