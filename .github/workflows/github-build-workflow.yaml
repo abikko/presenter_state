@@ -16,14 +16,14 @@ jobs:
       - name: Setup fvm 🚀
         run: curl -fsSL https://fvm.app/install.sh | bash -s -- 3.2.1
       - name: Setup fvm version 📌
-        run: fvm install 3.29.2 && fvm use 3.29.2
+        run: fvm install 3.29.2 && fvm use 3.29.2 --skip-pub-get
       - run: echo "Testing ${{ github.actor }} code 🚀"
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: Run linter 👀
         run: |
-          output=$(dart fix --dry-run)
+          output=$(fvm dart fix --dry-run)
           if [ "$output" != "Nothing to fix!" ]; then
-            echo "dart fix --dry-run found issues:"
+            echo "fvm dart fix --dry-run found issues:"
             echo "$output"
             exit 1
           fi
@@ -32,18 +32,18 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: Run formatter🔎
         run: |
-          format_output=$(dart format lib/)
+          format_output=$(fvm dart format lib/)
           expected_output="Formatted 0 files (0 changed)"
-          
+
           if [ "$format_output" != "$expected_output" ]; then
-            echo "dart format lib/ found files that needed formatting:"
+            echo "fvm dart format lib/ found files that needed formatting:"
             echo "$format_output"
             exit 1
           fi
-          
-          echo "dart format lib/ found no formatting changes needed."
+
+          echo "fvm dart format lib/ found no formatting changes needed."
           exit 0
-          
+
       - name: Run tests 🔎
         run: |
           fvm flutter test
