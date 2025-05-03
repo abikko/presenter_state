@@ -22,7 +22,7 @@ jobs:
         run: fvm flutter pub get
       - name: Run linter 👀
         run: |
-          fvm dart analyze --set-exit-if-changed
+          fvm dart analyze --fatal-warnings --fatal-infos
       - name: Run formatter🔎
         run: |
           fvm dart format lib/ --set-exit-if-changed
