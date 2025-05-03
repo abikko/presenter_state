@@ -22,22 +22,10 @@ jobs:
         run: fvm flutter pub get
       - name: Run linter 👀
         run: |
-          fvm dart analyze
+          fvm dart analyze --set-exit-if-changed
       - name: Run formatter🔎
         run: |
-        
-          format_output=$(fvm dart format lib/)
-          expected_output="Formatted 0 files (0 changed)"
-
-          if [ "$format_output" != "$expected_output"* ]; then
-            echo "fvm dart format lib/ found files that needed formatting:"
-            echo "$format_output"
-            exit 1
-          fi
-
-          echo "fvm dart format lib/ found no formatting changes needed."
-          exit 0
-
+          fvm dart format lib/ --set-exit-if-changed
       - run: echo "Testing ${{ github.actor }} code 🚀"
       - name: Run tests 🔎
         run: |
