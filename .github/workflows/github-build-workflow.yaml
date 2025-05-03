@@ -1,5 +1,5 @@
 name: Build and Test 🏗
-run-name: ${{ github.actor }} pushed and opened a Pull Request 💻
+run-name: ${{ github.actor }} pushed and opened a Pull Request {{ github.commit }} 💻
 on:
   pull_request:
     types: [review_requested, opened, reopened, synchronize]
@@ -17,7 +17,6 @@ jobs:
         run: curl -fsSL https://fvm.app/install.sh | bash -s -- 3.2.1
       - name: Setup fvm version 📌
         run: fvm install 3.29.2 && fvm use 3.29.2 --skip-pub-get
-      - run: echo "Testing ${{ github.actor }} code 🚀"
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: Run linter 👀
         run: |
@@ -37,6 +36,7 @@ jobs:
           echo "fvm dart format lib/ found no formatting changes needed."
           exit 0
 
+      - run: echo "Testing ${{ github.actor }} code 🚀"
       - name: Run tests 🔎
         run: |
           fvm flutter test
