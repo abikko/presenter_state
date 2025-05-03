@@ -10,6 +10,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Dummy checking dart analyze
+    Future.delayed(Durations.long1, () {
+      MediaQuery.of(context);
+    });
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
