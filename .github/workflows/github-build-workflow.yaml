@@ -1,4 +1,4 @@
-name: Build and Setup 🏗
+name: Build and Test 🏗
 run-name: ${{ github.actor }} pushed and opened a Pull Request 💻d
 on:
   pull_request:
@@ -17,4 +17,17 @@ jobs:
         run: curl -fsSL https://fvm.app/install.sh | bash -s -- 3.2.1
       - name: Setup fvm version 📌
         run: fvm install 3.29.2 && fvm use 3.29.2
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+  run-tests:
+    needs: setup-flutter
+    runs-on: macos-13
+    steps:
+      - run: echo "Testing ${{ github.actor }} code 🚀"
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: Run tests 🔎
+        run: |
+          fvm flutter test
       - run: echo "🍏 This job's status is ${{ job.status }}."
