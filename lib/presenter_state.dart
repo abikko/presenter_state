@@ -1,5 +1,3 @@
-library;
-
 export 'base/contract.dart' show Contract;
 export 'base/presenter.dart' show Presenter;
 export 'utils/context_extension.dart' show ContractContextExtension;

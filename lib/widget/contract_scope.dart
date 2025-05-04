@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:presenter_state/base/contract.dart';
 
-class ContractScope<IContract extends Contract> extends InheritedWidget {
-  final IContract contract;
-
+class ContractScope<IContract extends Contract<State>> extends InheritedWidget {
   const ContractScope({
     required super.child,
     required this.contract,
     super.key,
   });
+  final IContract contract;
 
   static ContractScope of(BuildContext context) {
     final ContractScope? result = context.dependOnInheritedWidgetOfExactType<ContractScope>();

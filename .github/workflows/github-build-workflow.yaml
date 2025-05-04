@@ -18,7 +18,7 @@ jobs:
       - name: Setup fvm version 📌
         run: fvm install 3.29.2 --skip-pub-get && fvm use 3.29.2 --skip-pub-get
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: echo "Flutter pub get!"
+      - name: Flutter pub get!
         run: fvm flutter pub get
       - name: Run linter 👀
         run: |

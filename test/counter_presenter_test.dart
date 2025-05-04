@@ -25,7 +25,9 @@ final class MockPresenter extends Presenter<MockState> implements MockContract {
 
   @override
   void decrease() {
-    if (state.value > 1) state = MockState(value: state.value - 1);
+    if (state.value > 1) {
+      state = MockState(value: state.value - 1);
+    }
   }
 }
 
