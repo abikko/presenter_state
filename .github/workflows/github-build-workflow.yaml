@@ -20,14 +20,14 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: echo "Flutter pub get!"
         run: fvm flutter pub get
+      - name: Installing lcov
+        run: brew install lcov
+      - name: Testing ${{ github.actor }} code and checking test coverage 🚀
+        run: fvm flutter test --coverage && lcov --remove coverage/lcov.info -o coverage/lcov.info && sh coverage_check.sh
       - name: Run linter 👀
         run: |
           fvm dart analyze --fatal-warnings --fatal-infos
       - name: Run formatter🔎
         run: |
           fvm dart format lib/ --set-exit-if-changed
-      - run: echo "Testing ${{ github.actor }} code 🚀"
-      - name: Run tests 🔎
-        run: |
-          fvm flutter test
       - run: echo "🍏 This job's status is ${{ job.status }}."
