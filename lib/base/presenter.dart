@@ -3,7 +3,7 @@ import 'dart:async';
 abstract class PresenterStream<State> {
   Stream<State> get stream;
 
-  //TODO: Think about using StreamController.broadcast - I think it is working a little bit strange...
+  // TODO(abikko): think about using StreamController.broadcast - I think it is working a little bit strange...
   late final StreamController<State> stateBroadcastController;
 }
 

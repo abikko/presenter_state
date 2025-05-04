@@ -3,7 +3,7 @@ import 'package:presenter_state/base/contract.dart';
 
 typedef PresenterWidgetBuilder<T> = Widget Function(BuildContext context, T state);
 
-class PresenterBuilder<IContract extends Contract, S> extends StatefulWidget {
+class PresenterBuilder<IContract extends Contract<S>, S> extends StatefulWidget {
   const PresenterBuilder({
     required this.contract,
     required this.builder,
@@ -19,7 +19,7 @@ class PresenterBuilder<IContract extends Contract, S> extends StatefulWidget {
   State<PresenterBuilder<IContract, S>> createState() => _PresenterBuilderState<IContract, S>();
 }
 
-class _PresenterBuilderState<IContract extends Contract, S> extends State<PresenterBuilder<IContract, S>> {
+class _PresenterBuilderState<IContract extends Contract<S>, S> extends State<PresenterBuilder<IContract, S>> {
   late final IContract contract;
   late final S? initialState;
 
@@ -28,15 +28,11 @@ class _PresenterBuilderState<IContract extends Contract, S> extends State<Presen
     super.initState();
     contract = widget.contract;
     initialState = widget.initialState;
-    assert(
-      widget.contract.watchState() is Stream<S>,
-      "Provided an error [IContract] object",
-    );
   }
 
   Widget map(BuildContext context, AsyncSnapshot<S> snapshot) {
     if (snapshot.hasError) {
-      throw snapshot.error ?? Exception();
+      throw snapshot.error! as Exception;
     }
     return widget.builder(context, snapshot.data as S);
   }
@@ -45,7 +41,7 @@ class _PresenterBuilderState<IContract extends Contract, S> extends State<Presen
   Widget build(BuildContext context) {
     return StreamBuilder<S>(
       initialData: contract.initialState,
-      stream: contract.watchState() as Stream<S>,
+      stream: contract.watchState(),
       builder: map,
     );
   }
