@@ -20,6 +20,10 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: echo "Flutter pub get!"
         run: fvm flutter pub get
+      - name: Installing lcov
+        run: brew install lcov
+      - name: Checking code coverage
+        run: fvm flutter test --coverage && lcov --remove coverage/lcov.info '*.g.dart' '*.part.dart' '*/generated/*' -o coverage/lcov.info && ./coverage_check.sh
       - name: Run linter 👀
         run: |
           fvm dart analyze --fatal-warnings --fatal-infos
