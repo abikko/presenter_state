@@ -23,7 +23,7 @@ jobs:
       - name: Installing lcov
         run: brew install lcov
       - name: Checking code coverage
-        run: fvm flutter test --coverage && lcov --remove coverage/lcov.info -o coverage/lcov.info && ./coverage_check.sh
+        run: fvm flutter test --coverage && lcov --remove coverage/lcov.info -o coverage/lcov.info && sh coverage_check.sh
       - name: Run linter 👀
         run: |
           fvm dart analyze --fatal-warnings --fatal-infos
