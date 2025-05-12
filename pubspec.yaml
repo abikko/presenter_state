@@ -1,7 +1,9 @@
 name: presenter_state
 description: State Manager
 version: 0.0.1
-homepage:
+homepage: https://github.com/abikko/presenter_state
+repository: https://github.com/abikko/presenter_state
+issue_tracker: https://github.com/abikko/presenter_state/issues
 
 environment:
   sdk: '>=3.1.0 <4.0.0'

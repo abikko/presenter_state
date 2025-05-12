@@ -1,0 +1,14 @@
+example/
+
+.vscode/
+
+test/
+
+.run/
+
+.fvm/
+
+build/
+coverage/
+coverage_badge.svg
+coverage_check.sh
