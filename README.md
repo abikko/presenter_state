@@ -1,4 +1,4 @@
-![Coverage](https://github.com/abikko/presenter_state.git/coverage_badge.svg?sanitize=true)
+![Coverage](https://github.com/abikko/presenter_state/coverage_badge.svg?sanitize=true)
 
 **Package is currently in development phase.**
 
