@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:presenter_state/base/contract.dart';
+import 'package:provider/provider.dart';
 
 typedef PresenterWidgetBuilder<T> = Widget Function(BuildContext context, T state);
 
 class PresenterBuilder<IContract extends Contract<S>, S> extends StatefulWidget {
   const PresenterBuilder({
-    required this.contract,
     required this.builder,
+    this.contract,
     this.initialState,
     super.key,
   });
 
-  final IContract contract;
+  final IContract? contract;
   final S? initialState;
   final PresenterWidgetBuilder<S> builder;
 
@@ -26,7 +27,7 @@ class _PresenterBuilderState<IContract extends Contract<S>, S> extends State<Pre
   @override
   void initState() {
     super.initState();
-    contract = widget.contract;
+    contract = widget.contract ?? context.read<IContract>();
     initialState = widget.initialState;
   }
 

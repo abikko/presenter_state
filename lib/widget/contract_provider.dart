@@ -1,25 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:presenter_state/base/contract.dart';
+import 'package:provider/provider.dart';
 
-class ContractProvider<IContract extends Contract<State>> extends InheritedWidget {
-  const ContractProvider({
+class ContractProvider<State, IContract extends Contract<State>> extends Provider<IContract> {
+  ContractProvider({
     required super.child,
-    required this.contract,
+    required super.create,
+    super.builder,
+    super.dispose,
+    super.lazy,
     super.key,
   });
-  final IContract contract;
-
-  static ContractProvider of(BuildContext context) {
-    final ContractProvider? result = context.dependOnInheritedWidgetOfExactType<ContractProvider>();
-    assert(result != null, 'No ContractScope found in context');
-    return result!;
-  }
-
-  static ContractProvider? maybeOf<T>(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<ContractProvider>();
-
-  @override
-  bool updateShouldNotify(ContractProvider oldWidget) {
-    return identical(oldWidget.contract, contract);
-  }
 }
