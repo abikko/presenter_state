@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   mocktail: ^1.0.4
+  provider: ^6.1.5
 
 dev_dependencies:
   test_cov_console: ^0.2.2
