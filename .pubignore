@@ -12,3 +12,4 @@ build/
 coverage/
 coverage_badge.svg
 coverage_check.sh
+coverage/coverage.json
