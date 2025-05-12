@@ -24,6 +24,8 @@ jobs:
         run: brew install lcov
       - name: Testing ${{ github.actor }} code and checking test coverage 🚀
         run: fvm flutter test --coverage && lcov --remove coverage/lcov.info -o coverage/lcov.info && sh coverage_check.sh
+      - name: Generating test code coverage badge 🏅
+        run: fvm dart run test_coverage_badge --file coverage/lcov.info
       - name: Run linter 👀
         run: |
           fvm dart analyze --fatal-warnings --fatal-infos
