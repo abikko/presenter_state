@@ -15,7 +15,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
         with:
-          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.ref }}
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - name: Setup fvm 🚀
         run: curl -fsSL https://fvm.app/install.sh | bash -s -- 3.2.1
@@ -32,7 +32,7 @@ jobs:
         uses: raven-actions/bot-details@v1
         id: bot-details
         with:
-          bot_slug_name: code-coverage-badge-bot
+          bot-slug-name: code-coverage-badge-bot
       - run: |
           git config --global user.name "${{ steps.bot-details.outputs.name }}"
           git config --global user.email "${{ steps.bot-details.outputs.email }}"
