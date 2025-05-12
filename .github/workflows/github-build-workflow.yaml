@@ -29,7 +29,7 @@ jobs:
         uses: raven-actions/bot-details@v1
         with:
           bot_slug_name: code-coverage-badge-bot
-        run: |
+      - run: |
           git config --global user.name "${{ steps.bot-details.outputs.name }}"
           git config --global user.email "${{ steps.bot-details.outputs.email }}"
       - name: Generating test code coverage badge 🏅
