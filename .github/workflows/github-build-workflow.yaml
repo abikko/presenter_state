@@ -3,15 +3,19 @@ run-name: ${{ github.actor }} pushed and opened a Pull Request {{ github.commit 
 on:
   pull_request:
     types: [review_requested, opened, reopened, synchronize]
+permissions:
+  contents: write
 jobs:
   setup-flutter:
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - name: Setup fvm 🚀
         run: curl -fsSL https://fvm.app/install.sh | bash -s -- 3.2.1
@@ -24,8 +28,14 @@ jobs:
         run: brew install lcov
       - name: Testing ${{ github.actor }} code and checking test coverage 🚀
         run: fvm flutter test --coverage && lcov --remove coverage/lcov.info -o coverage/lcov.info && sh coverage_check.sh
+      - name: Settings github actions bot configs
+        run: |
+          git config --global user.name "code-coverage-badge-bot"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Generating test code coverage badge 🏅
         run: fvm dart run test_coverage_badge --file coverage/lcov.info
+      - name: Uploading test code coverage badge to PR
+        run: git add coverage_badge.svg && git commit -m "Add test coverage badge" && git push
       - name: Run linter 👀
         run: |
           fvm dart analyze --fatal-warnings --fatal-infos
