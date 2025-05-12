@@ -29,13 +29,9 @@ jobs:
       - name: Testing ${{ github.actor }} code and checking test coverage 🚀
         run: fvm flutter test --coverage && lcov --remove coverage/lcov.info -o coverage/lcov.info && sh coverage_check.sh
       - name: Settings github actions bot configs
-        uses: raven-actions/bot-details@v1
-        id: bot-details
-        with:
-          bot-slug-name: code-coverage-badge-bot
       - run: |
-          git config --global user.name "${{ steps.bot-details.outputs.name }}"
-          git config --global user.email "${{ steps.bot-details.outputs.email }}"
+          git config --global user.name "code-coverage-badge-bot"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Generating test code coverage badge 🏅
         run: fvm dart run test_coverage_badge --file coverage/lcov.info
       - name: Uploading test code coverage badge to PR
