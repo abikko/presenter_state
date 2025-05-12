@@ -35,8 +35,6 @@ jobs:
       - name: Generating test code coverage badge 🏅
         run: fvm dart run test_coverage_badge --file coverage/lcov.info
       - name: Uploading test code coverage badge to PR
-        with:
-          name: test-coverage-badge
         run: git add coverage_badge.svg && git commit -m "Add test coverage badge" && git push
       - name: Run linter 👀
         run: |
