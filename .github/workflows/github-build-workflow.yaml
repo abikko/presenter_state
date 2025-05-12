@@ -5,7 +5,7 @@ on:
     types: [review_requested, opened, reopened, synchronize]
 jobs:
   setup-flutter:
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -24,8 +24,20 @@ jobs:
         run: brew install lcov
       - name: Testing ${{ github.actor }} code and checking test coverage 🚀
         run: fvm flutter test --coverage && lcov --remove coverage/lcov.info -o coverage/lcov.info && sh coverage_check.sh
+      - name: Settings github actions bot configs
+        id: bot-details
+        uses: raven-actions/bot-details@v1
+        with:
+          bot_slug_name: code-coverage-badge-bot
+        run: |
+          git config --global user.name "${{ steps.bot-details.outputs.name }}"
+          git config --global user.email "${{ steps.bot-details.outputs.email }}"
       - name: Generating test code coverage badge 🏅
         run: fvm dart run test_coverage_badge --file coverage/lcov.info
+      - name: Uploading test code coverage badge to PR
+        with:
+          name: test-coverage-badge
+        run: git add coverage_badge.svg && git commit -m "Add test coverage badge" && git push
       - name: Run linter 👀
         run: |
           fvm dart analyze --fatal-warnings --fatal-infos
