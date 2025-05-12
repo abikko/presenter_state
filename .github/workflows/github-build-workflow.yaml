@@ -3,6 +3,8 @@ run-name: ${{ github.actor }} pushed and opened a Pull Request {{ github.commit 
 on:
   pull_request:
     types: [review_requested, opened, reopened, synchronize]
+permissions:
+  contents: write
 jobs:
   setup-flutter:
     runs-on: macos-latest
